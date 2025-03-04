@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.circle {
+width: 100px;
+height: 100px;
+background-color: orange;
+animation: sq;
+animation-duration: 4s;
+animation-iteration-count: infinite;
+}
+@keyframes sq {
+0%{transform: translate(0px,0px) rotate(-360deg);}
+25%{transform: translate(300px,0px) rotate(-180deg);}
+50%{transform: translate(300px,300px) rotate(0deg) ;}
+75%{transform: translate(0px,300px) rotate(180deg);}
+100%{transform: translate(0px,0px) rotate(360deg);}
+}
+</style>
+</head>
+<body>
+<div class="circle"></div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background-color: white;
+}
+.container {
+position: relative;
+width: 100px;
+height: 100px;
+}
+.square {
+position: absolute;
+width: 100px;
+height: 100px;
+background-color: black;
+border: 2px solid grey;
+animation: rotate 2s linear infinite;
+opacity: 0;
+}
+@keyframes rotate {
+0% { transform: rotate(0deg); opacity: 1; }
+100% { transform: rotate(360deg); opacity: 1; }
+}
+.square:nth-child(1) { animation-delay: 0s; }
+.square:nth-child(2) { animation-delay: 0.2s; }
+.square:nth-child(3) { animation-delay: 0.4s; }
+.square:nth-child(4) { animation-delay: 0.6s; }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="square"></div>
+<div class="square"></div>
+<div class="square"></div>
+<div class="square"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,275 @@
+
+QN1)
+HTML:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="square" >
+CSS
+ </div>
+</body>
+CSS:
+body{
+display: flex;
+padding:0px;
+margin:10px;
+}
+.square{
+background-color: rgb(123, 190, 22);
+height: 50px;
+width: 80px;
+text-align: center;
+font-size:20px;
+color:azure;
+animation: anim1 5s linear ;
+border-radius:10px;
+justify-content: center;
+align-items:center;
+display:flex;
+}
+@keyframes anim1 {
+0%{
+transform: rotate(0deg);
+}
+25%{
+transform: rotate(20deg);
+}
+50%{
+transform: translate(500px,0) rotate(0deg);
+}
+55%{
+transform: translate(500px,0) rotate(0deg);
+}
+70%{
+background-color: aqua;
+transform: translate(500px,0) rotate(0deg);
+}
+100%{
+transform: translate(0,0) rotate(-360deg);
+ }
+}
+Output:
+QN2)Infinite circle forming a square path
+HTML:
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container"> </div>
+</div>
+</body>
+</html>
+CSS:
+@keyframes moveSquare {
+0% { top: 20%; left: 20%; } 
+25% { top: 20%; left: 80%; } 
+50% { top: 80%; left: 80%; } 
+75% { top: 80%; left: 20%; } 
+100% { top: 20%; left: 20%; } 
+}
+@keyframes rotateBorder {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+.container {
+background-color: blue;
+width: 3vw;
+height: 3vw;
+border-radius: 50%;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+animation: moveSquare 6s linear infinite, rotateBorder 2s linear infinite;
+}
+QN3)
+HTML CODE:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12-Sided Star with Overlapping Square</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="star-container">
+<div class="star star-1"></div>
+<div class="star star-2"></div>
+<div class="star star-3"></div>
+<div class="square"></div> 
+</div>
+</body>
+</html>
+CSS CODE:
+body {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background-color: white;
+}
+.star-container {
+position: relative;
+width: 120px;
+height: 120px;
+}
+.star {
+position: absolute;
+width: 120px;
+height: 120px;
+background-color: blue;
+}
+.star::before,
+.star::after {
+content: "";
+position: absolute;
+width: 120px;
+height: 120px;
+background-color: blue;
+}
+.star::before {
+transform: rotate(30deg);
+}
+.star::after {
+transform: rotate(-30deg);
+}
+.star-1 {
+transform: rotate(15deg);
+}
+.star-2 {
+transform: rotate(20deg);
+}
+.star-3 {
+transform: rotate(25deg);
+}
+.square {
+position: absolute;
+width: 120px;
+height: 120px;
+background-color: blue;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%) rotate(30deg);
+}
+OUTPUT:
+QN4)HTML:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Problem 4</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<div class ="title"><h1>WEB PROGRAMMING</h1></div>
+<div class ="b">
+<a href="s">Home</a>
+<a href="s">About</a>
+<a href="s">Contact</a>
+</div>
+<div class ="main-body">
+<div class ="main">
+<h3>Main Section</h3>
+<p>This is the main content of the page</p>
+</div>
+<div class ="article">
+<h3>Article</h3>
+<p>This is a standalone srticle to the main content.</p>
+</div>
+<div class ="sidebar">
+<h3>Sidebar</h3>
+<p>This is the sidebar , containing related links or ads</p>
+</div>
+</div>
+<div class ="last-part"><p>2025 your Company. All rights reserved.</p></div>
+</div>
+</body>
+</html>
+CSS:
+*{
+margin:0;
+padding:0;
+color:white;
+font-weight: 700;
+}
+body{
+width: 100%;
+height:100vh;
+}
+.container{
+width: 98%;
+height:97vh;
+padding:1% 1%;
+display:flex;
+flex-direction: column;
+justify-content: space-between;
+}
+.main-body{
+display: grid;
+height:45vh;
+grid-template-areas: 
+"m m m sb"
+"a a a sb";
+gap: 1vh;
+}
+.title{
+width:100%;
+height: 25vh;
+display: flex;
+justify-content: center;
+align-items: center;
+color:white;
+background-color:rgba(255, 0, 0, 0.729);
+}
+.b{
+height:10vh;
+background-color: rgb(51, 170, 217);
+display: flex;
+align-items: center;
+padding: 0 2%;
+}
+.b a {
+text-decoration: none;
+padding:1% 2%;
+width:fit-content;
+}
+.main{
+grid-area: m;
+background-color: #4cca25aa;
+}
+.main-body > *{
+padding:2vh;
+display: flex;
+justify-content: space-around;
+align-items: left;
+flex-direction: column;
+}
+.article{
+grid-area: a;
+background-color: rgb(174, 24, 174);
+}
+.sidebar{
+grid-area: sb;
+gap:10%;
+padding:5% 5%;
+justify-content:initial;
+background-color: orange;
+}
+.last-part{
+display: flex;
+justify-content: center;
+align-items: center;
+height:10vh;
+background-color: gray;
+}

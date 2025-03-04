@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ <title>Analog Clock</title>
+ <style>
+ body {
+ margin: 0;
+ height: 100vh;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+ overflow: hidden;
+ }
+
+ .clock {
+ width: 350px;
+ height: 350px;
+ border-radius: 50%;
+ background: radial-gradient(circle, rgba(255,255,255,0.9) 0%,
+rgba(255,255,255,0.7) 70%);
+ position: relative;
+ box-shadow: 0 0 30px rgba(0,0,0,0.2);
+ border: 12px solid white;
+ }
+
+ .center-point {
+ position: absolute;
+ top: 50%;
+
+ left: 50%;
+ width: 20px;
+ height: 20px;
+ border-radius: 50%;
+ background: #333;
+ transform: translate(-50%, -50%);
+ z-index: 10;
+ }
+
+ .center-point::after {
+ content: '';
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ width: 10px;
+ height: 10px;
+ border-radius: 50%;
+ background: #ff6b6b;
+ transform: translate(-50%, -50%);
+ }
+
+ .hour-mark {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ width: 6px;
+
+ height: 15px;
+ background: #333;
+ border-radius: 3px;
+ transform-origin: center bottom;
+ }
+
+ .minute-mark {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ width: 2px;
+ height: 8px;
+ background: #777;
+ border-radius: 1px;
+ transform-origin: center bottom;
+ }
+
+ .hour-number {
+ position: absolute;
+ font-family: Arial, sans-serif;
+ font-size: 24px;
+ font-weight: bold;
+ color: #333;
+ text-align: center;
+ width: 40px;
+ height: 40px;
+
+ line-height: 40px;
+ transform: translate(-50%, -50%);
+ }
+
+ .hand {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform-origin: center bottom;
+ border-radius: 6px 6px 3px 3px;
+ z-index: 5;
+ }
+
+ .hour-hand {
+ width: 8px;
+ height: 80px;
+ background: #333;
+ transform: translate(-50%, -100%) rotate(0deg);
+ }
+
+ .minute-hand {
+ width: 6px;
+ height: 120px;
+ background: #555;
+ transform: translate(-50%, -100%) rotate(0deg);
+ }
+
+
+ .second-hand {
+ width: 3px;
+ height: 140px;
+ background: #ff6b6b;
+ transform: translate(-50%, -100%) rotate(0deg);
+ z-index: 4;
+ }
+ </style>
+</head>
+<body>
+ <div class="clock" id="clock">
+ <div id="hour-marks"></div>
+ <div class="hand hour-hand" id="hour-hand"></div>
+ <div class="hand minute-hand" id="minute-hand"></div>
+ <div class="hand second-hand" id="second-hand"></div>
+ <div class="center-point"></div>
+ </div>
+ <script>
+ // Create hour marks and numbers
+ const clock = document.getElementById('clock');
+ const hourMarksContainer = document.getElementById('hour-marks');
+ const clockRadius = 175; // Half of clock width
+
+ // Create hour marks and numbers
+
+ for (let i = 0; i < 60; i++) {
+ const isHourMark = i % 5 === 0;
+ const mark = document.createElement('div');
+ mark.className = isHourMark ? 'hour-mark' : 'minute-mark';
+
+ const angle = i * 6;
+ const angleRadians = angle * Math.PI / 180;
+
+ // Calculate position around the clock
+ const markRadius = clockRadius - 15; // Position inside the clock edge
+
+ mark.style.transform = `translate(-50%, 0) rotate(${angle}deg) translateY(-
+${markRadius}px)`;
+ hourMarksContainer.appendChild(mark);
+
+ // Add hour numbers
+ if (isHourMark) {
+ const hourNumber = document.createElement('div');
+ hourNumber.className = 'hour-number';
+ const hourNum = i / 5 === 0 ? 12 : i / 5; // Convert position to hour
+number
+ hourNumber.textContent = hourNum;
+
+ // Calculate position for the number
+ const numberAngle = (i * 6 - 90) * Math.PI / 180; // -90 to start at 12 o'clock
+position
+
+ const numberRadius = clockRadius - 40; // Position for numbers
+
+ const x = clockRadius + numberRadius * Math.cos(numberAngle);
+ const y = clockRadius + numberRadius * Math.sin(numberAngle);
+
+ hourNumber.style.left = x + 'px';
+ hourNumber.style.top = y + 'px';
+
+ clock.appendChild(hourNumber);
+ }
+ }
+
+ // Clock functionality
+ const hourHand = document.getElementById('hour-hand');
+ const minuteHand = document.getElementById('minute-hand');
+ const secondHand = document.getElementById('second-hand');
+
+ function updateClock() {
+ const now = new Date();
+ const hours = now.getHours() % 12;
+ const minutes = now.getMinutes();
+ const seconds = now.getSeconds();
+ const milliseconds = now.getMilliseconds();
+
+ // Calculate rotation angles with smooth movement
+ const secondAngle = (seconds + milliseconds / 1000) * 6;
+
+ const minuteAngle = (minutes + seconds / 60) * 6;
+ const hourAngle = (hours + minutes / 60) * 30;
+
+ // Apply rotations
+ secondHand.style.transform = `translate(-50%, -100%)
+rotate(${secondAngle}deg)`;
+ minuteHand.style.transform = `translate(-50%, -100%)
+rotate(${minuteAngle}deg)`;
+ hourHand.style.transform = `translate(-50%, -100%) rotate(${hourAngle}deg)`;
+
+ // Call update on next animation frame for smooth second hand
+ requestAnimationFrame(updateClock);
+ }
+
+ // Start the clock
+ updateClock();
+ </script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+EXCERCISE 3:
+1)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Flexbox Example</title>
+ <style>
+ .container {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center; 
+ height: 200px;
+ gap: 10px; 
+ }
+ .box {
+ width: 70px;
+ height: 70px;
+ background-color: red;
+ }
+ </style>
+</head>
+<body>
+ <div class="container">
+ <div class="box"></div>
+ <div class="box"></div>
+ </div>
+</body>
+</html>
+OUTPUT:
+2) <!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Flexbox Example</title>
+ <style>
+ .container {
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center; 
+ height: 200px;
+ gap: 10px; 
+ }
+ .box {
+ width: 70px;
+ height: 70px;
+ background-color: red;
+ }
+ </style>
+</head>
+<body>
+ <div class="container">
+ <div class="box"></div>
+ <div class="box"></div>
+ </div>
+</body>
+</html>
+3)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Sign In</title>
+ <style>
+ body {
+ margin: 0;
+ font-family: Arial, sans-serif;
+ display: flex;
+ justify-content: center; 
+ align-items: center; 
+ height: 100vh;
+ background-color: #ffccd5; 
+ }
+ .block {
+ background-color: white;
+ padding: 35px 200px;
+ border-radius: 10px;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+ text-align: center;
+ }
+ .block h2 {
+ margin-bottom: 20px;
+ font-size: 26px;
+ color: #444;
+ }
+ .input-group {
+ margin-bottom: 20px;
+ text-align: left;
+ }
+ .input-group label {
+ display: block;
+ margin-bottom: 8px;
+ font-size: 14px;
+ color: #555;
+ }
+ .input-group input {
+ width: 100%;
+ padding: 12px;
+ border: 1px solid #ddd;
+ border-radius: 5px;
+ font-size: 14px;
+ box-sizing: border-box; 
+ }
+ .submit-btn {
+ width: 100%;
+ padding: 12px;
+ border: none;
+ border-radius: 5px;
+ background-color: #0066cc; 
+ color: white;
+ font-size: 16px;
+ cursor: pointer;
+ transition: background-color 0.3s ease;
+ }
+ .submit-btn:hover {
+ background-color: #004c99;
+ }
+ 
+ .reset-password {
+ margin-top: 15px;
+ display: block;
+ font-size: 14px;
+ color: #0066cc;
+ text-decoration: none;
+ }
+ .reset-password:hover {
+ text-decoration: underline;
+ }
+ </style>
+</head>
+<body>
+ <div class="block">
+ <h2>Sign In</h2>
+ <form>
+ <div class="input-group">
+ <label for="user">Username</label>
+ <input type="text" id="user" placeholder="Enter your username">
+ </div>
+ <div class="input-group">
+ <label for="pass">Password</label>
+ <input type="password" id="pass" placeholder="Enter your password";>
+ </div>
+ <button type="submit" class="submit-btn">Sign In</button>
+ <a href="#" class="reset-password">Forgot Password?</a>
+ </form>
+ </div>
+</body>
+</html>
+4)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Navigation Menu</title>
+ <style>
+ body {
+ margin: 0;
+ font-family: Arial, sans-serif;
+ background-color: #f4f4f4;
+ }
+ .navigation {
+ display: flex;
+ justify-content: space-around;
+ background-color: #333;
+ padding: 12px 0;
+ }
+ .navigation a {
+ color: white;
+ text-decoration: none;
+ padding: 12px 20px;
+ font-size: 16px;
+ }
+ .navigation a:hover {
+ background-color: #575757;
+ border-radius: 5px;
+ color: #0CAFFF;
+ }
+ .dropdown {
+ position: relative;
+ }
+ .dropdown-menu {
+ display: none;
+ position: absolute;
+ top: 40px;
+ left: 0;
+ background-color: #444;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ border-radius: 5px;
+ padding: 12px 0;
+ min-width: 180px;
+ z-index: 1000;
+ }
+ .dropdown-menu a {
+ display: block;
+ padding: 12px 20px;
+ color: white;
+ text-decoration: none;
+ }
+ .dropdown-menu a:hover {
+ background-color: #575757;
+ }
+ .dropdown:hover .dropdown-menu {
+ display: block;
+ }
+ </style>
+</head>
+<body>
+ <nav class="navigation">
+ <a href="#">Home</a>
+ <div class="dropdown">
+ <a href="#"> Services</a>
+ <div class="dropdown-menu">
+ <a href="#">Web Design</a>
+ <a href="#">SEO</a>
+ <a href="#">Marketing</a>
+ </div>
+ </div>
+ <a href="#">About Us</a>
+ <a href="#">Contact Us</a>
+ </nav>
+</body>
+</html>
+5)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Vertical Menu</title>
+ <style>
+ body {
+ margin: 0;
+ font-family: Arial, sans-serif;
+ background-color: #f4f4f4;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 100vh;
+ }
+ .menu {
+ width: 200px;
+ border-radius: 10px;
+ overflow: hidden;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ }
+ .menu a {
+ display: block;
+ padding: 15px;
+ text-decoration: none;
+ font-size: 16px;
+ color: white;
+ background-color: #333; 
+ text-align: center;
+ }
+ .menu a:first-child {
+ background-color: #00bcd4; 
+ font-weight: bold;
+ }
+ .menu a:hover {
+ background-color: #444; 
+ }
+ .menu a:not(:first-child) {
+ border-top: 1px solid #444; 
+ }
+ </style>
+</head>
+<body>
+ <div class="menu">
+ <a href="#">Home</a>
+ <a href="#">Services</a>
+ <a href="#">About</a>
+ <a href="#">Portfolio</a>
+ <a href="#">Contact</a>
+ </div>
+</body>
+</html>
+6)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Acer Projector Display</title>
+ <style>
+ body {
+ margin: 0;
+ padding: 0;
+ background-color: black; 
+ color: white;
+ font-family: Arial, sans-serif;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 100vh;
+ position: relative;
+ }
+ .acer-logo {
+ font-size: 5cm;
+ font-weight: bold;
+ text-align: center;
+ color: white;
+ text-shadow: 2px 2px 5px grey, -2px -2px 5px grey, 
+ 2px -2px 5px grey, -2px 2px 5px grey; 
+ }
+ .info {
+ position: absolute;
+ bottom: 20px;
+ left: 20px;
+ font-size: 0.9em;
+ }
+ .info .qr-code {
+ width: 50px;
+ height: 50px;
+ background: #ccc;
+ display: inline-block;
+ margin-right: 10px;
+ }
+ .info .details {
+ display: inline-block;
+ vertical-align: top;
+ }
+ .no-signal {
+ position: absolute;
+ bottom: 20px;
+ right: 20px;
+ font-size: 0.9em;
+ text-align: right;
+ }
+ </style>
+</head>
+<body>
+ <div class="acer-logo">acer</div>
+ <div class="info">
+ <div class="qr-code"></div>
+ <div class="details">
+ <p>XX223H</p>
+ <p>Projector Information</p>
+ </div>
+ </div>
+ <div class="no-signal">
+ <p>No Signal</p>
+ <p>VGA IN</p>
+ </div>
+</body>
+</html>

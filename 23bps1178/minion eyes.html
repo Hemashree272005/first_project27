@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minion Eye Following Cursor</title>
+<style>
+body {
+margin: 0;
+height: 100vh;
+display: flex;
+
+justify-content: center;
+align-items: center;
+background: #f0db4f; /* Minion yellow background */
+overflow: hidden;
+cursor: none; /* Hide default cursor for better effect */
+}
+.container {
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 80px;
+}
+.goggle {
+width: 200px;
+height: 200px;
+background: #333;
+border-radius: 50%;
+border: 15px solid #666;
+display: flex;
+justify-content: center;
+align-items: center;
+position: relative;
+overflow: hidden;
+box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.goggle::before {
+content: '';
+position: absolute;
+width: 210px;
+height: 210px;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 50%;
+transform: translateY(-50%);
+}
+.eye {
+width: 110px;
+height: 110px;
+background: #fff;
+border-radius: 50%;
+position: relative;
+overflow: hidden;
+box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+}
+.iris {
+width: 50px;
+height: 50px;
+background: linear-gradient(#795548, #3e2723);
+border-radius: 50%;
+position: absolute;
+top: 50%;
+
+left: 50%;
+transform: translate(-50%, -50%);
+box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+.pupil {
+width: 25px;
+height: 25px;
+background: #000;
+border-radius: 50%;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+.highlight {
+width: 15px;
+height: 15px;
+background: #fff;
+border-radius: 50%;
+position: absolute;
+top: 30%;
+left: 30%;
+transform: translate(-50%, -50%);
+}
+.highlight:nth-child(2) {
+
+width: 8px;
+height: 8px;
+top: 60%;
+left: 70%;
+}
+.eyelid {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 50%;
+background: #f0db4f;
+transform: translateY(-100%);
+z-index: 10;
+border-bottom: 5px solid #ccc;
+transition: transform 0.3s;
+}
+.eyelid.bottom {
+top: auto;
+bottom: 0;
+transform: translateY(100%);
+border-bottom: none;
+border-top: 5px solid #ccc;
+}
+.goggle:hover .eyelid {
+
+transform: translateY(-50%);
+}
+.goggle:hover .eyelid.bottom {
+transform: translateY(50%);
+}
+.cursor {
+position: fixed;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background: rgba(255, 255, 255, 0.5);
+transform: translate(-50%, -50%);
+pointer-events: none;
+z-index: 9999;
+box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+/* Straps for goggles */
+.strap {
+position: absolute;
+width: 400px;
+height: 50px;
+background: #666;
+z-index: -1;
+}
+
+/* Minion mouth */
+.mouth {
+position: absolute;
+width: 120px;
+height: 60px;
+background: #333;
+border-radius: 0 0 100px 100px;
+bottom: -150px;
+display: flex;
+justify-content: center;
+overflow: hidden;
+}
+.teeth {
+display: flex;
+position: absolute;
+top: 10px;
+}
+.tooth {
+width: 15px;
+height: 20px;
+background: #fff;
+border-radius: 3px;
+margin: 0 2px;
+}
+</style>
+</head>
+
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="container">
+<div class="strap"></div>
+<div class="goggle">
+<div class="eyelid"></div>
+<div class="eyelid bottom"></div>
+<div class="eye">
+<div class="iris" id="iris-left">
+<div class="pupil">
+<div class="highlight"></div>
+<div class="highlight"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mouth">
+<div class="teeth">
+<div class="tooth"></div>
+<div class="tooth"></div>
+<div class="tooth"></div>
+<div class="tooth"></div>
+<div class="tooth"></div>
+</div>
+</div>
+
+</div>
+<script>
+// Get DOM elements
+const cursor = document.getElementById('cursor');
+const leftIris = document.getElementById('iris-left');
+const goggle = document.querySelector('.goggle');
+const eyelids = document.querySelectorAll('.eyelid');
+// Set max movement range (in pixels)
+const maxEyeMove = 25;
+// Update cursor position
+document.addEventListener('mousemove', (e) => {
+// Move custom cursor
+cursor.style.left = e.clientX + 'px';
+cursor.style.top = e.clientY + 'px';
+// Get goggle position
+const goggleRect = goggle.getBoundingClientRect();
+const goggleCenterX = goggleRect.left + goggleRect.width / 2;
+const goggleCenterY = goggleRect.top + goggleRect.height / 2;
+// Calculate distance from cursor to center of goggle
+const distX = e.clientX - goggleCenterX;
+const distY = e.clientY - goggleCenterY;
+// Calculate distance ratio (for limiting movement)
+
+const distanceRatio = Math.min(1, Math.sqrt(distX * distX + distY * distY) / 300);
+// Calculate eye movement with limitations
+const moveX = (distX / goggleRect.width) * maxEyeMove * distanceRatio;
+const moveY = (distY / goggleRect.height) * maxEyeMove * distanceRatio;
+// Apply transformation to iris
+leftIris.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% +
+${moveY}px))`;
+});
+// Add blinking animation
+function blink() {
+eyelids.forEach(eyelid => {
+if (eyelid.classList.contains('bottom')) {
+eyelid.style.transform = 'translateY(0%)';
+} else {
+eyelid.style.transform = 'translateY(0%)';
+}
+});
+setTimeout(() => {
+eyelids.forEach(eyelid => {
+if (eyelid.classList.contains('bottom')) {
+eyelid.style.transform = 'translateY(100%)';
+} else {
+eyelid.style.transform = 'translateY(-100%)';
+}
+});
+
+}, 200);
+// Random blink interval between 2 and 6 seconds
+const nextBlink = Math.random() * 4000 + 2000;
+setTimeout(blink, nextBlink);
+}
+// Start blinking
+setTimeout(blink, 1000);
+// Make eye blink when clicked
+document.addEventListener('click', () => {
+blink();
+});
+</script>
+</body>
+</html>

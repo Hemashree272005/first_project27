@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Mobile Flashlight</title>
+ <style>
+ * {
+
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ }
+
+ body {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ min-height: 100vh;
+ background-color: #121212;
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ overflow: hidden;
+ }
+
+ .scene {
+ position: relative;
+ width: 100%;
+ height: 100vh;
+ overflow: hidden;
+ }
+
+ .phone {
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ transform: translate(-50%, -50%);
+ width: 300px;
+
+ height: 600px;
+ background-color: #1a1a1a;
+ border-radius: 40px;
+ border: 8px solid #333;
+ box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+ overflow: hidden;
+ z-index: 10;
+ }
+
+ .phone-screen {
+ position: relative;
+ width: 100%;
+ height: 100%;
+ background-color: #000;
+ display: flex;
+ flex-direction: column;
+ color: white;
+ }
+
+ .status-bar {
+ display: flex;
+ justify-content: space-between;
+ padding: 10px 20px;
+ font-size: 14px;
+ background-color: rgba(0, 0, 0, 0.8);
+ }
+
+ .time {
+
+ font-weight: bold;
+ }
+
+ .icons span {
+ margin-left: 10px;
+ }
+
+ .app-screen {
+ flex: 1;
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ align-items: center;
+ padding: 40px 0;
+ }
+
+ .flashlight-label {
+ font-size: 24px;
+ font-weight: bold;
+ margin-top: 40px;
+ }
+
+ .flashlight-btn {
+ width: 120px;
+ height: 120px;
+ border-radius: 50%;
+ background-color: #333;
+ display: flex;
+
+ justify-content: center;
+ align-items: center;
+ cursor: pointer;
+ margin: 40px 0;
+ box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+ transition: all 0.3s ease;
+ }
+
+ .flashlight-btn-inner {
+ width: 100px;
+ height: 100px;
+ border-radius: 50%;
+ background: radial-gradient(circle at center, #555, #444, #333);
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ transition: all 0.3s ease;
+ }
+
+ .flashlight-icon {
+ font-size: 40px;
+ color: #ddd;
+ transition: all 0.3s ease;
+ }
+
+ .flashlight-btn.on .flashlight-btn-inner {
+ background: radial-gradient(circle at center, #fff, #eee, #ddd);
+ }
+
+
+ .flashlight-btn.on .flashlight-icon {
+ color: #333;
+ }
+
+ .brightness-control {
+ width: 80%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 10px;
+ }
+
+ .brightness-label {
+ font-size: 16px;
+ color: #ccc;
+ }
+
+ .brightness-slider {
+ width: 100%;
+ -webkit-appearance: none;
+ height: 5px;
+ border-radius: 5px;
+ background: #555;
+ outline: none;
+ opacity: 0.7;
+ transition: opacity 0.2s;
+ }
+
+
+ .brightness-slider::-webkit-slider-thumb {
+ -webkit-appearance: none;
+ appearance: none;
+ width: 20px;
+ height: 20px;
+ border-radius: 50%;
+ background: #fff;
+ cursor: pointer;
+ }
+
+ .light-beam {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background: radial-gradient(
+ circle at 50% 50%,
+ rgba(255, 255, 255, 0.8) 0%,
+ rgba(255, 255, 255, 0.2) 20%,
+ rgba(255, 255, 255, 0) 70%
+ );
+ opacity: 0;
+ pointer-events: none;
+ transition: opacity 0.3s ease;
+ mix-blend-mode: screen;
+ }
+
+
+ .bottom-bar {
+ width: 100%;
+ height: 5px;
+ background-color: #333;
+ border-radius: 3px;
+ margin-bottom: 10px;
+ }
+
+ .objects {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ pointer-events: none;
+ }
+
+ .object {
+ position: absolute;
+ background-color: #333;
+ border-radius: 10px;
+ }
+
+ /* Room objects */
+ .object:nth-child(1) {
+ width: 100px;
+ height: 120px;
+
+ left: 10%;
+ top: 20%;
+ }
+
+ .object:nth-child(2) {
+ width: 150px;
+ height: 80px;
+ right: 15%;
+ top: 30%;
+ }
+
+ .object:nth-child(3) {
+ width: 80px;
+ height: 200px;
+ left: 25%;
+ bottom: 10%;
+ }
+
+ .object:nth-child(4) {
+ width: 200px;
+ height: 100px;
+ right: 20%;
+ bottom: 20%;
+ }
+
+ .instructions {
+ position: absolute;
+ bottom: 20px;
+
+ text-align: center;
+ color: #666;
+ font-size: 14px;
+ width: 100%;
+ z-index: 5;
+ }
+ </style>
+</head>
+<body>
+ <div class="scene">
+ <div class="objects">
+ <div class="object"></div>
+ <div class="object"></div>
+ <div class="object"></div>
+ <div class="object"></div>
+ </div>
+
+ <div class="light-beam" id="light-beam"></div>
+
+ <div class="phone">
+ <div class="phone-screen">
+ <div class="status-bar">
+ <div class="time" id="time">9:41</div>
+ <div class="icons">
+ <span>📶</span>
+ <span>📡</span>
+ <span>🔋</span>
+ </div>
+
+ </div>
+
+ <div class="app-screen">
+ <div class="flashlight-label">Flashlight</div>
+
+ <div class="flashlight-btn" id="flashlight-btn">
+ <div class="flashlight-btn-inner">
+ <div class="flashlight-icon">⚡</div>
+ </div>
+ </div>
+
+ <div class="brightness-control">
+ <div class="brightness-label">Brightness</div>
+ <input type="range" min="1" max="100" value="100" class="brightness-slider"
+id="brightness-slider">
+ </div>
+ </div>
+
+ <div class="bottom-bar"></div>
+ </div>
+ </div>
+
+ <div class="instructions">Click the flashlight button to toggle on/off. Move your mouse
+around to aim the light.</div>
+ </div>
+ <script>
+ document.addEventListener('DOMContentLoaded', function() {
+ // Get elements
+
+ const flashlightBtn = document.getElementById('flashlight-btn');
+ const lightBeam = document.getElementById('light-beam');
+ const brightnessSlider = document.getElementById('brightness-slider');
+ const timeDisplay = document.getElementById('time');
+
+ // Set current time
+ function updateTime() {
+ const now = new Date();
+ let hours = now.getHours();
+ let minutes = now.getMinutes();
+
+ // Format time as 12-hour with leading zeros
+ hours = hours % 12 || 12;
+ minutes = minutes < 10 ? '0' + minutes : minutes;
+
+ timeDisplay.textContent = `${hours}:${minutes}`;
+ }
+
+ // Initial time update
+ updateTime();
+
+ // Update time every minute
+ setInterval(updateTime, 60000);
+
+ // Flashlight state
+ let isOn = false;
+
+ // Toggle flashlight
+
+ flashlightBtn.addEventListener('click', function() {
+ isOn = !isOn;
+
+ if (isOn) {
+ flashlightBtn.classList.add('on');
+ lightBeam.style.opacity = brightnessSlider.value / 100;
+ } else {
+ flashlightBtn.classList.remove('on');
+ lightBeam.style.opacity = 0;
+ }
+ });
+
+ // Adjust brightness
+ brightnessSlider.addEventListener('input', function() {
+ if (isOn) {
+ lightBeam.style.opacity = this.value / 100;
+ }
+ });
+
+ // Move light beam with mouse
+ document.addEventListener('mousemove', function(e) {
+ if (isOn) {
+ const x = e.clientX;
+ const y = e.clientY;
+
+ lightBeam.style.background = `radial-gradient(
+ circle at ${x}px ${y}px,
+ rgba(255, 255, 255, 0.9) 0%,
+23BPS1178
+ rgba(255, 255, 255, 0.4) 10%,
+ rgba(255, 255, 255, 0.2) 20%,
+ rgba(255, 255, 255, 0) 70%
+ )`;
+ }
+ });
+
+ // Handle touch movement for mobile
+ document.addEventListener('touchmove', function(e) {
+ if (isOn && e.touches.length > 0) {
+ const touch = e.touches[0];
+ const x = touch.clientX;
+ const y = touch.clientY;
+
+ lightBeam.style.background = `radial-gradient(
+ circle at ${x}px ${y}px,
+ rgba(255, 255, 255, 0.9) 0%,
+ rgba(255, 255, 255, 0.4) 10%,
+ rgba(255, 255, 255, 0.2) 20%,
+ rgba(255, 255, 255, 0) 70%
+ )`;
+
+ // Prevent default to avoid page scrolling
+ e.preventDefault();
+ }
+ }, { passive: false });
+
+ // Double-click shortcut
+
+ document.addEventListener('dblclick', function() {
+ isOn = !isOn;
+
+ if (isOn) {
+ flashlightBtn.classList.add('on');
+ lightBeam.style.opacity = brightnessSlider.value / 100;
+ } else {
+ flashlightBtn.classList.remove('on');
+ lightBeam.style.opacity = 0;
+ }
+ });
+ });
+ </script>
+</body>
+</html>

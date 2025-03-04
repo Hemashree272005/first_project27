@@ -1,0 +1,154 @@
+1. selects the bdate from table empl'
+SQL> select bdate from emp;
+
+BDATE
+---------
+24-JAN-02
+01-APR-06
+02-DEC-03
+03-OCT-05
+
+
+2. selects the bdate from emp table and converts it into character in the format YYYY MM DD HH MM SS
+SQL> select to_char(bdate,'DD-MON-YYYY HH24:MI:SS') from emp;
+
+TO_CHAR(BDATE,'DD-MON-YYYYHH2
+-----------------------------
+24-JAN-2002 00:00:00
+01-APR-2006 00:00:00
+02-DEC-2003 00:00:00
+03-OCT-2005 00:00:00
+
+
+3.selects the bdate from emp and adds 7 to it and displays it as nextweek
+SQL> select bdate +7 as nextweek from emp;
+
+NEXTWEEK
+---------
+31-JAN-02
+08-APR-06
+09-DEC-03
+10-OCT-05
+
+
+
+4.selects the bdate from emp and subtracts 30 from it and displays it as lastmonth
+SQL>  select bdate -30 as lastmonth from emp;
+
+LASTMONTH
+---------
+25-DEC-01
+02-MAR-06
+02-NOV-03
+03-SEP-05
+
+
+5.selects the difference between dates between 2 given dates
+SQL> select to_date('2003-02-01','YYYY-MM-DD') - to_date('2005-02-01','YYYY-MM-DD') as daysdeffierence
+ from emp;
+
+DAYSDEFFIERENCE
+---------------
+           -731
+           -731
+           -731
+           -731
+
+
+6.selects the year,month,day from bdate separately
+SQL> select extract (year from bdate) as year, extract( month from bdate ) as month,extract (day from
+bdate ) as day from emp;
+
+      YEAR      MONTH        DAY
+---------- ---------- ----------
+      2002          1         24
+      2006          4          1
+      2003         12          2
+      2005         10          3
+
+
+
+
+7.selects eno,name,bdate,title,salary,sno from emp where bdate is greater than a given date
+SQL> select * from emp where bdate> to_date('2003-03-03','YYYY-MM-DD');
+
+       ENO ENAME   BDATE     TITLE       SALARY        DNO
+---------- ------- --------- ------- ---------- ----------
+       102 bcd     01-APR-06 SA          160000          2
+       103 cde     02-DEC-03 SA          130000          3
+       104 def     03-OCT-05 EE          150000          4
+
+
+
+8.select eno,ename,bdate,title,salary,dno from emo where bdate is between 2 given dates
+SQL> select * from emp where bdate BETWEEN  to_date('2003-03-03','YYYY-MM-DD') AND TO_DATE('2005-12-30','YYYY-MM-DD');
+
+       ENO ENAME   BDATE     TITLE       SALARY        DNO
+---------- ------- --------- ------- ---------- ----------
+       103 cde     02-DEC-03 SA          130000          3
+       104 def     03-OCT-05 EE          150000          4
+
+
+
+
+9. selects the truncated value of bdate. formatting the month to first day and lastday
+SQL> SELECT TRUNC( BDATE,'MONTH') AS FIRST_DAY,LAST_DAY(BDATE) AS LAST_DAY FROM EMP;
+
+FIRST_DAY LAST_DAY
+--------- ---------
+01-JAN-02 31-JAN-02
+01-APR-06 30-APR-06
+01-DEC-03 31-DEC-03
+01-OCT-05 31-OCT-05
+
+
+
+
+10.select the day of the week by converting date into character
+SQL> SELECT TO_CHAR( BDATE,'DAY') AS DAYSOFWEEK FROM EMP;
+
+DAYSOFWEEK
+------------------------------------
+THURSDAY
+SATURDAY
+TUESDAY
+MONDAY
+
+
+
+
+11.selects the months by adding 3 to bdate
+SQL> select add_months(bdate,3) as new_date from emp;
+
+NEW_DATE
+---------
+24-APR-02
+01-JUL-06
+02-MAR-04
+03-JAN-06
+
+
+
+12. selects the number of months between 2 given dates
+SQL> SELECT MONTHS_BETWEEN(TO_DATE('2025-02-20', 'YYYY-MM-DD'), BDATE) AS months_difference
+  2  FROM EMP;
+
+MONTHS_DIFFERENCE
+-----------------
+       276.870968
+       226.612903
+       254.580645
+       232.548387
+
+
+
+13. selects the date by adding 1 day to the given date
+SQL> SELECT BDATE, BDATE + 1 AS next_day
+  2  FROM EMP;
+
+BDATE     NEXT_DAY
+--------- ---------
+24-JAN-02 25-JAN-02
+01-APR-06 02-APR-06
+02-DEC-03 03-DEC-03
+03-OCT-05 04-OCT-05

@@ -1,0 +1,188 @@
+create table emp( eno int primary key,ename varchar(7),bdate date,title varchar(7),salary int,dno int)
+
+insert into emp values(101,'abc','24-Jan-02','EE',100000,1);
+insert into emp values(102,'bcd','01-Apr-06','SA',160000,2);
+insert into emp values(103,'cde','02-Dec-03','SA',130000,3);
+insert into emp values(104,'def','03-Oct-05','EE',150000,4);
+
+create table proj(pno int primary key,pname varchar(7),budget int,dno int);
+
+insert into proj values(001,'qwe',10000,1);
+insert into proj values(002,'ert',15000,2);
+insert into proj values(003,'yui',16000,3);
+insert into proj values(004,'xcv',18000,4);
+
+create table dept (dno int primary key,dname varchar(7),mgreno int);
+
+insert into dept values(1,'D1',123);
+insert into dept values(2,'D2',234);
+insert into dept values(3,'D3',345);
+insert into dept values(4,'D4',456);
+
+create table workson( eno int primary key,pno int,resp varchar(7),hours int);
+
+insert into workson values(101,001,'Manager',20);
+insert into workson values(102,002,'Consult',24);
+insert into workson values(103,002,'Consult',24);
+insert into workson values(104,004,'AsstMgr',12);
+
+
+SQL> select * from emp;
+
+       ENO ENAME   BDATE     TITLE       SALARY        DNO
+---------- ------- --------- ------- ---------- ----------
+       101 abc     24-JAN-02 EE          100000          1
+       102 bcd     01-APR-06 SA          160000          2
+       103 cde     02-DEC-03 SA          130000          3
+       104 def     03-OCT-05 EE          150000          4
+
+SQL> select * from proj;
+
+       PNO PNAME       BUDGET        DNO
+---------- ------- ---------- ----------
+         1 qwe          10000          1
+         2 ert          15000          2
+         3 yui          16000          3
+         4 xcv          18000          4
+
+
+
+SQL> select * from dept;
+
+       DNO DNAME       MGRENO
+---------- ------- ----------
+         1 D1             123
+         2 D2             234
+         3 D3             345
+         4 D4             456
+
+
+SQL> select * from workson;
+
+       ENO        PNO RESP         HOURS
+---------- ---------- ------- ----------
+       101          1 Manager         20
+       102          2 Consult         24
+       103          2 Consult         24
+       104          4 AsstMgr         12
+
+
+
+
+
+
+
+1.
+SQL> select pno,pname from proj where budget>10000;
+
+       PNO PNAME
+---------- -------
+         2 ert
+         3 yui
+         4 xcv
+
+
+
+
+
+2.
+SQL> select * from workson where hours<10 and resp='Manager';
+
+no rows selected
+
+
+
+
+
+3.
+SQL> select ename, eno from emp where title in ('EE','SA') and salary>35000;
+
+ENAME          ENO
+------- ----------
+abc            101
+bcd            102
+cde            103
+def            104
+
+
+
+
+4.
+SQL> select e.ename from emp e, dept d where e.dno=d.dno and d.dname='D1' order by e.salary desc;
+
+ENAME
+-------
+abc
+
+
+
+
+
+5.
+SQL> select * from dept order by dname;
+
+       DNO DNAME       MGRENO
+---------- ------- ----------
+         1 D1             123
+         2 D2             234
+         3 D3             345
+         4 D4             456
+
+
+
+
+
+6.
+SQL> select e.ename,d.dname,e.title from emp e, dept d where e.dno=d.dno;
+
+ENAME   DNAME   TITLE
+------- ------- -------
+abc     D1      EE
+bcd     D2      SA
+cde     D3      SA
+def     D4      EE
+
+
+
+
+
+
+7.
+SQL> select p.pname,w.hours,p.pno from proj p, workson w where hours>10 and p.pno=w.pno;
+
+PNAME        HOURS        PNO
+------- ---------- ----------
+qwe             20          1
+ert             24          2
+ert             24          2
+xcv             12          4
+
+
+
+
+8.
+SQL> select p.pname,d.dname,p.budget from proj p,dept d where p.pno=d.dno and budget<50000;
+
+PNAME   DNAME       BUDGET
+------- ------- ----------
+qwe     D1           10000
+ert     D2           15000
+yui     D3           16000
+xcv     D4           18000
+
+
+
+
+9.
+SQL> select e.eno,e.salary from emp e, workson w where e.eno=w.eno and w.resp='Consult' order by e.sal
+ary desc;
+
+       ENO     SALARY
+---------- ----------
+       102     160000
+       103     130000
+
+
+
+
+

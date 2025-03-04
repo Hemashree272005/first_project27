@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.square{
+display: flex;
+background-color: red;
+width: 80px;
+height: 50px;
+border-radius: 5px;
+font-size: 30px;
+color: white;
+justify-content: center;
+align-items: center;
+animation-name: mov;
+animation-duration: 4s;
+}
+@keyframes mov{
+0%{transform: rotate(0deg); translate: 0px;background-color: red;}
+25%{transform: rotate(30deg);translate: 0px;background-color: orangered}
+50%{transform: rotate(0deg);translate: 400px;background-color: aqua;}
+100%{transform: rotate(-360deg);translate: 0px;background-color: orange;}
+}
+</style>
+</head>
+<body>
+<div class="square">CSS</div>
+</body>
+</html>

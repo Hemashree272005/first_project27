@@ -1,0 +1,101 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertical Image Slider</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 300px;
+      height: 400px;
+      overflow: hidden;
+      border: 3px solid #000;
+      border-radius: 10px;
+    }
+
+    .slider-wrapper {
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.5s ease;
+    }
+
+    .slider-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slider-container">
+    <div class="slider-wrapper" id="sliderWrapper">
+      <img src="https://via.placeholder.com/300x400?text=Image+1" class="slider-img">
+      <img src="https://via.placeholder.com/300x400?text=Image+2" class="slider-img">
+      <img src="https://via.placeholder.com/300x400?text=Image+3" class="slider-img">
+      <img src="https://via.placeholder.com/300x400?text=Image+4" class="slider-img">
+    </div>
+    <button class="prev" onclick="moveSlide('prev')">▲</button>
+    <button class="next" onclick="moveSlide('next')">▼</button>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+
+    function moveSlide(direction) {
+      const sliderWrapper = document.getElementById("sliderWrapper");
+      const totalSlides = document.querySelectorAll(".slider-img").length;
+
+      if (direction === 'next') {
+        currentIndex++;
+        if (currentIndex >= totalSlides) currentIndex = 0;
+      } else if (direction === 'prev') {
+        currentIndex--;
+        if (currentIndex < 0) currentIndex = totalSlides - 1;
+      }
+
+      const offset = -currentIndex * 400; // Each image's height is 400px
+      sliderWrapper.style.transform = `translateY(${offset}px)`;
+    }
+  </script>
+
+</body>
+</html>

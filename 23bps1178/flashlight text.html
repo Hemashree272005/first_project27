@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body, html {
+margin: 0;
+padding: 0;
+height: 100%;
+background-color: #000;
+display: flex;
+justify-content: center;
+
+align-items: center;
+overflow: hidden;
+font-family: 'Segoe UI', system-ui, sans-serif;
+cursor: none;
+}
+.container {
+width: 90%;
+max-width: 800px;
+height: 80%;
+position: relative;
+overflow: hidden;
+}
+.text-content {
+font-size: 24px;
+line-height: 1.6;
+color: transparent;
+text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+padding: 20px;
+}
+.flashlight {
+position: fixed;
+width: 200px;
+height: 200px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+
+transform: translate(-50%, -50%);
+pointer-events: none;
+mix-blend-mode: difference;
+z-index: 999;
+}
+h1 {
+font-size: 36px;
+margin-bottom: 30px;
+color: transparent;
+text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+p {
+margin-bottom: 20px;
+}
+.highlight {
+color: #fff;
+text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+</style>
+</head>
+<body>
+<div class="flashlight" id="flashlight"></div>
+<div class="container">
+<div class="text-content">
+
+<h1>Exploring the World of Web Programming 🌐</h1>
+<p>Welcome to the fascinating universe of web development! 🚀 Here, we craft digital
+experiences that connect people across the globe.</p>
+<p>Frontend Development 🎨 is where design meets code. HTML structures content like
+the skeleton of your website, CSS styles it with beautiful designs, and JavaScript brings it to life
+with interactivity.</p>
+<p>Backend Development ⚙️ powers the invisible magic. Servers process requests,
+databases store information, and APIs connect different systems together seamlessly.</p>
+<p>Modern frameworks make development more efficient! React ⚛️ revolutionizes UI
+creation, Node.js 🟢 brings JavaScript to the server, and Python 🐍 offers simplicity for web
+applications.</p>
+<p>Web security 🔒 is crucial for protecting user data. Implementing HTTPS, validating
+inputs, and preventing injections are essential practices every developer must know.</p>
+<p>Responsive design 📱 ensures your website looks great on all devices. Using flexible
+layouts and media queries allows your content to adapt to any screen size.</p>
+<p>Performance optimization ⚡ keeps users engaged. Minifying files, optimizing images,
+and using content delivery networks can significantly improve loading times.</p>
+<p>The web is constantly evolving! 🔄 WebAssembly, Progressive Web Apps, and
+GraphQL are just a few technologies shaping the future of web development.</p>
+</div>
+</div>
+
+<script>
+const flashlight = document.getElementById('flashlight');
+const container = document.querySelector('.container');
+const textContent = document.querySelector('.text-content');
+// Track mouse movement
+document.addEventListener('mousemove', function(e) {
+// Update flashlight position
+flashlight.style.left = e.clientX + 'px';
+flashlight.style.top = e.clientY + 'px';
+// Calculate position relative to container
+const containerRect = container.getBoundingClientRect();
+const mouseX = e.clientX;
+const mouseY = e.clientY;
+// Check if mouse is within or near text container
+const inRange =
+mouseX >= containerRect.left - 100 &&
+mouseX <= containerRect.right + 100 &&
+mouseY >= containerRect.top - 100 &&
+mouseY <= containerRect.bottom + 100;
+if (inRange) {
+// Light up text elements near the cursor
+const elements = textContent.querySelectorAll('h1, p');
+elements.forEach(element => {
+const rect = element.getBoundingClientRect();
+
+const centerX = rect.left + rect.width / 2;
+const centerY = rect.top + rect.height / 2;
+const distance = Math.sqrt(
+Math.pow(mouseX - centerX, 2) +
+Math.pow(mouseY - centerY, 2)
+);
+if (distance < 200) {
+element.classList.add('highlight');
+} else {
+element.classList.remove('highlight');
+}
+});
+} else {
+// Turn off all highlights when cursor is far away
+const elements = textContent.querySelectorAll('.highlight');
+elements.forEach(element => {
+element.classList.remove('highlight');
+});
+}
+});
+// Hide flashlight when cursor leaves the window
+document.addEventListener('mouseleave', function() {
+flashlight.style.display = 'none';
+});
+
+// Show flashlight when cursor enters the window
+document.addEventListener('mouseenter', function() {
+flashlight.style.display = 'block';
+});
+</script>
+</body>
+</html>

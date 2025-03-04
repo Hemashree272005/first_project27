@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Webcam Video Capture</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+max-width: 900px;
+margin: 0 auto;
+padding: 20px;
+text-align: center;
+background-color: #f0f0f0;
+}
+h1 {
+color: #333;
+}
+.container {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 20px;
+}
+.video-container {
+position: relative;
+width: 640px;
+height: 480px;
+border: 2px solid #333;
+
+border-radius: 8px;
+overflow: hidden;
+background-color: #000;
+}
+#video {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.controls {
+display: flex;
+gap: 10px;
+margin-bottom: 20px;
+}
+button {
+padding: 10px 20px;
+font-size: 16px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+.start-btn {
+background-color: #4CAF50;
+color: white;
+}
+.start-btn:hover {
+background-color: #388E3C;
+
+}
+.stop-btn {
+background-color: #F44336;
+color: white;
+}
+.stop-btn:hover {
+background-color: #D32F2F;
+}
+.capture-btn, .record-btn, .stop-record-btn {
+background-color: #2196F3;
+color: white;
+}
+.capture-btn:hover, .record-btn:hover, .stop-record-btn:hover {
+background-color: #1976D2;
+}
+.status {
+margin-top: 10px;
+font-style: italic;
+color: #555;
+}
+.screenshots {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+justify-content: center;
+margin-top: 20px;
+}
+.screenshot {
+
+position: relative;
+width: 200px;
+border: 1px solid #ccc;
+border-radius: 4px;
+overflow: hidden;
+}
+.screenshot img {
+width: 100%;
+display: block;
+}
+.no-webcam {
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100%;
+color: white;
+font-size: 18px;
+}
+</style>
+</head>
+<body>
+<h1>Webcam Video Capture</h1>
+<div class="container">
+<div class="video-container">
+<video id="video" autoplay playsinline></video>
+<div class="no-webcam" id="no-webcam">Webcam not started</div>
+</div>
+
+<div class="controls">
+<button id="start-btn" class="start-btn">Start Webcam</button>
+<button id="stop-btn" class="stop-btn" disabled>Stop Webcam</button>
+<button id="capture-btn" class="capture-btn" disabled>Capture Screenshot</button>
+<button id="record-btn" class="record-btn" disabled>Start Recording</button>
+<button id="stop-record-btn" class="stop-record-btn" disabled>Stop
+Recording</button>
+</div>
+<p id="status" class="status">Click "Start Webcam" to begin.</p>
+<div id="screenshots" class="screenshots"></div>
+<div id="recordings" class="screenshots"></div>
+</div>
+<script>
+const video = document.getElementById('video');
+const noWebcam = document.getElementById('no-webcam');
+const startBtn = document.getElementById('start-btn');
+const stopBtn = document.getElementById('stop-btn');
+const captureBtn = document.getElementById('capture-btn');
+const recordBtn = document.getElementById('record-btn');
+const stopRecordBtn = document.getElementById('stop-record-btn');
+const status = document.getElementById('status');
+const screenshots = document.getElementById('screenshots');
+const recordingsContainer = document.getElementById('recordings');
+let stream = null;
+let mediaRecorder = null;
+
+let recordedChunks = [];
+// Start webcam and prompt for camera & microphone access
+startBtn.addEventListener('click', async () => {
+try {
+stream = await navigator.mediaDevices.getUserMedia({
+video: { width: { ideal: 1280 }, height: { ideal: 720 } },
+audio: true
+});
+video.srcObject = stream;
+noWebcam.style.display = 'none';
+startBtn.disabled = true;
+stopBtn.disabled = false;
+captureBtn.disabled = false;
+recordBtn.disabled = false;
+status.textContent = 'Webcam is active. You can capture screenshots or record video.';
+} catch (err) {
+console.error('Error accessing webcam:', err);
+status.textContent = `Error: ${err.message}. Please ensure you have a webcam and granted
+permission.`;
+}
+});
+// Stop webcam
+stopBtn.addEventListener('click', () => {
+if (stream) {
+stream.getTracks().forEach(track => track.stop());
+video.srcObject = null;
+noWebcam.style.display = 'flex';
+
+startBtn.disabled = false;
+stopBtn.disabled = true;
+captureBtn.disabled = true;
+recordBtn.disabled = true;
+stopRecordBtn.disabled = true;
+status.textContent = 'Webcam stopped.';
+}
+});
+// Capture a screenshot
+captureBtn.addEventListener('click', () => {
+if (stream) {
+const canvas = document.createElement('canvas');
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
+const ctx = canvas.getContext('2d');
+ctx.drawImage(video, 0, 0);
+const imgURL = canvas.toDataURL('image/png');
+const img = document.createElement('img');
+img.src = imgURL;
+const screenshotDiv = document.createElement('div');
+screenshotDiv.className = 'screenshot';
+screenshotDiv.appendChild(img);
+screenshots.appendChild(screenshotDiv);
+status.textContent = 'Screenshot captured.';
+}
+});
+
+// Start recording video
+recordBtn.addEventListener('click', () => {
+if (stream) {
+recordedChunks = [];
+mediaRecorder = new MediaRecorder(stream);
+mediaRecorder.ondataavailable = (e) => {
+if (e.data.size > 0) {
+recordedChunks.push(e.data);
+}
+};
+mediaRecorder.onstop = () => {
+const blob = new Blob(recordedChunks, { type: 'video/webm' });
+const url = URL.createObjectURL(blob);
+const videoElem = document.createElement('video');
+videoElem.src = url;
+videoElem.controls = true;
+videoElem.style.width = '300px';
+const recordingDiv = document.createElement('div');
+recordingDiv.className = 'screenshot';
+recordingDiv.appendChild(videoElem);
+recordingsContainer.appendChild(recordingDiv);
+status.textContent = 'Recording stopped and saved.';
+};
+mediaRecorder.start();
+recordBtn.disabled = true;
+stopRecordBtn.disabled = false;
+status.textContent = 'Recording...';
+}
+
+});
+// Stop video recording
+stopRecordBtn.addEventListener('click', () => {
+if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+mediaRecorder.stop();
+recordBtn.disabled = false;
+stopRecordBtn.disabled = true;
+}
+});
+</script>
+</body>
+</html>

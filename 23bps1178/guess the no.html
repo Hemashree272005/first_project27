@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Simple Guess the Number (1-10)</title>
+<style>
+body {
+font-family: Arial;
+text-align: center;
+margin-top: 50px;
+}
+button {
+margin: 10px;
+padding: 5px 10px;
+}
+input {
+margin: 10px;
+padding: 5px;
+width: 200px;
+height: 30px;
+font-size: 16px;
+text-align: center;
+border: 2px solid #ccc;
+border-radius: 5px;
+}
+</style>
+</head>
+<body>
+<h1>Guess the Number!</h1>
+<p>I'm thinking of a number between 1 and 10...</p>
+
+<input type="number" id="guess" min="1" max="10" placeholder="Enter
+your guess">
+<button onclick="checkGuess()">Submit Guess</button>
+<button onclick="newGame()">New Game</button>
+
+<p id="message"></p>
+<p>Attempts: <span id="attempts">0</span></p>
+
+<script>
+let targetNumber;
+let attempts;
+
+function newGame() {
+targetNumber = Math.floor(Math.random() * 10) + 1;
+attempts = 0;
+document.getElementById('attempts').textContent = attempts;
+document.getElementById('message').textContent = '';
+document.getElementById('guess').value = '';
+}
+
+function checkGuess() {
+let guess = Number(document.getElementById('guess').value);
+let message = document.getElementById('message');
+
+if (guess < 1 || guess > 10 || isNaN(guess)) {
+
+message.textContent = 'Please enter a number between 1 and 10!';
+return;
+}
+
+attempts++;
+document.getElementById('attempts').textContent = attempts;
+
+if (guess === targetNumber) {
+message.textContent = `Congratulations! You got it in ${attempts}
+attempts!`;
+} else if (guess < targetNumber) {
+message.textContent = 'Too low! Try again!';
+} else {
+message.textContent = 'Too high! Try again!';
+}
+}
+
+newGame();
+</script>
+</body>
+</html>

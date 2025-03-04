@@ -1,0 +1,1103 @@
+ChatGPT
+
+Log in
+
+Sign up
+You said:
+Hello World Web Page - Buttons, Functions, Variables, Identifiers - Assignment Statements 
+and Objects - Document Object Model, Forms: form Element, Controls, Text Control 
+Accessing a Form’s Control Values, reset and focus Methods – Event Handler Attributes: 
+onchange, onmouseover, onmouseout.
+Module:5 Advanced JavaScript 2 hours
+While Loop, External JavaScript Files, do Loop, Radio Buttons, Checkboxes, for Loop -
+fieldset and legend Elements- Manipulating CSS with JavaScript- Using z-index to Stack 
+Elements-Textarea Controls - Pull-Down Menus- List Boxes- Canvas and Drawing - Event 
+Handler and Listener give me the most difficult questions under these topics adn specift the topics used
+ChatGPT said:
+Here are some of the most difficult and challenging questions based on the topics you provided. Each question is designed to test your understanding of the advanced JavaScript and DOM manipulation concepts as well as HTML forms and CSS interaction with JavaScript.
+
+1. Buttons, Functions, Variables, Identifiers - Assignment Statements, and Objects
+Topic: JavaScript Functions, Variables, Objects
+
+Question:
+You are tasked with building a form that uses buttons to add, remove, and edit objects in an array of JavaScript objects. Implement a JavaScript function that:
+
+Adds a new object to the array with properties name, age, and status (values should be taken from input fields).
+Displays the current array of objects dynamically on the web page when the "View List" button is clicked.
+Allows the user to edit the name and age of an object in the array when they click the "Edit" button corresponding to the item.
+Bonus: The "Edit" button should only appear after the object is added to the array.
+
+2. Document Object Model, Forms: form Element, Controls, Text Control
+Topic: DOM, Forms, Form Elements
+
+Question:
+Given an HTML form with a set of radio buttons for "Gender" (Male, Female), a set of checkboxes for "Hobbies" (Reading, Traveling, Cooking), and a submit button, write a JavaScript function that:
+
+Validates the form to ensure at least one radio button is selected and at least one checkbox is checked before the form is submitted.
+On form submission, displays the selected values in a table dynamically below the form. Use innerHTML or textContent for this task.
+Bonus: Include a "Reset" button that clears all selected values and dynamically hides the table.
+
+3. Event Handler Attributes: onchange, onmouseover, onmouseout
+Topic: Event Handlers
+
+Question:
+Write a JavaScript solution that implements the following functionality:
+
+When the user changes the value in a text input, it should trigger an onchange event to check whether the value is a valid email (e.g., includes "@" and ".com").
+On mouse hover over a specific div (with a unique class), an onmouseover event should change its background color to blue and increase the font size.
+On mouse leave (onmouseout), the background color should reset, and the font size should revert to the original size.
+4. While Loop, do Loop, for Loop
+Topic: JavaScript Loops
+
+Question:
+Create a JavaScript program that:
+
+Uses a for loop to generate a multiplication table (from 1 to 12) and displays it dynamically in an HTML table element.
+After the table is generated, use a while loop to calculate the sum of all even numbers in the table.
+Finally, use a do...while loop to display a confirmation message for every even number in the table, prompting the user to confirm if it should be included in the sum.
+5. Fieldset and Legend Elements
+Topic: HTML Forms
+
+Question:
+Design a complex HTML form with multiple sections. The form should include:
+
+A fieldset for personal information with a legend titled "Personal Info" containing fields for name, email, and phone number.
+A fieldset for address information with a legend titled "Address Info" containing fields for street, city, and zip code.
+A button that, when clicked, validates that both sections are filled out correctly. If not, display a custom error message under each fieldset using JavaScript and style it with CSS.
+6. Manipulating CSS with JavaScript
+Topic: DOM and CSS Manipulation
+
+Question:
+Write a JavaScript function that:
+
+Dynamically adds a CSS class to the <body> element when a user clicks a button. This CSS class should change the background color to a random color every time the button is clicked.
+If the user clicks the button five times, change the background color of a specific div element (with id="specialDiv") to a gradient from green to yellow using JavaScript.
+7. Using z-index to Stack Elements
+Topic: CSS z-index and Layout
+
+Question:
+Create an HTML page with three div elements, each with distinct content. Use JavaScript to:
+
+Dynamically change the z-index of each div when a button is clicked, so that the divs stack on top of each other in reverse order each time the button is clicked.
+Add a fade effect using JavaScript and CSS transitions when the z-index changes, making the transition between div stacking smooth.
+8. Textarea Controls
+Topic: Textarea and Form Control
+
+Question:
+Write a JavaScript solution where:
+
+The user can type their address in a <textarea> field.
+When the "Submit" button is clicked, JavaScript should validate the textarea to ensure it is not empty and does not exceed 200 characters.
+If the validation passes, display the entered address in a separate div. If the validation fails, display an error message in the same div.
+9. Pull-Down Menus, List Boxes
+Topic: HTML Select Elements
+
+Question:
+Create an HTML form with the following:
+
+A select element that allows the user to choose a country from a list of options (e.g., USA, UK, Canada).
+Depending on the country selected, dynamically update a second select element with states or provinces relevant to that country (e.g., if "USA" is selected, show "California", "Texas", etc.).
+Implement this functionality using JavaScript and ensure that the second dropdown only shows relevant options based on the first dropdown selection.
+10. Canvas and Drawing
+Topic: HTML5 Canvas
+
+Question:
+Create a simple interactive drawing application using the HTML5 <canvas> element. The application should:
+
+Allow the user to draw shapes (circle, rectangle) by clicking and dragging the mouse.
+Include buttons to change the drawing color and reset the canvas.
+Implement the functionality using JavaScript to capture mouse events (mousedown, mousemove, mouseup).
+11. Event Handler and Listener
+Topic: JavaScript Event Listeners
+
+Question:
+Write a JavaScript program that:
+
+Listens for a click event on a button with the id "toggleVisibility".
+When the button is clicked, toggle the visibility of a div with the id "contentDiv".
+Use an addEventListener for the click event and ensure that the content div smoothly fades in and out by adjusting its opacity with CSS.
+Advanced Bonus Challenge: Combining Multiple Concepts
+Topic: DOM, CSS, Forms, Events
+
+Question:
+Create a complete form where:
+
+There is a set of input fields for the user to enter their name, age, and a list of hobbies (checkboxes).
+When the form is submitted, dynamically create a profile card using the values entered, and display it on the page.
+Use JavaScript to manipulate the card’s appearance dynamically:
+Change the background color of the profile card when the user hovers over it.
+Allow the user to edit the name and age directly on the card by clicking on it.
+Use event listeners to detect changes and update the card’s content.
+These questions should challenge your understanding of JavaScript, DOM manipulation, forms, CSS, and event handling in various real-world scenarios.
+
+
+You said:
+givr answers as well
+ChatGPT said:
+Sure! Below are the answers to the difficult questions you requested:
+
+1. Buttons, Functions, Variables, Identifiers - Assignment Statements, and Objects
+Answer:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Object Array Example</title>
+  <style>
+    #object-list { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Manage Object Array</h1>
+  <form id="object-form">
+    Name: <input type="text" id="name"><br>
+    Age: <input type="number" id="age"><br>
+    Status: <input type="text" id="status"><br>
+    <button type="button" onclick="addObject()">Add Object</button>
+  </form>
+  
+  <button onclick="viewObjects()">View List</button>
+  <div id="object-list"></div>
+
+  <script>
+    let objectArray = [];
+    
+    function addObject() {
+      let name = document.getElementById("name").value;
+      let age = document.getElementById("age").value;
+      let status = document.getElementById("status").value;
+      
+      if (name && age && status) {
+        let newObject = { name, age, status };
+        objectArray.push(newObject);
+        alert("Object added!");
+        document.getElementById("object-form").reset();
+      }
+    }
+    
+    function viewObjects() {
+      let listDiv = document.getElementById("object-list");
+      listDiv.innerHTML = "<h3>Object List:</h3><ul>";
+      
+      objectArray.forEach((obj, index) => {
+        listDiv.innerHTML += `<li>${index + 1}. ${obj.name}, ${obj.age}, ${obj.status} <button onclick="editObject(${index})">Edit</button></li>`;
+      });
+      
+      listDiv.innerHTML += "</ul>";
+    }
+
+    function editObject(index) {
+      let obj = objectArray[index];
+      document.getElementById("name").value = obj.name;
+      document.getElementById("age").value = obj.age;
+      document.getElementById("status").value = obj.status;
+      
+      // Modify object after editing
+      objectArray[index] = { name: obj.name, age: obj.age, status: obj.status };
+    }
+  </script>
+</body>
+</html>
+2. Document Object Model, Forms: form Element, Controls, Text Control
+Answer:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Validation</title>
+</head>
+<body>
+  <form id="userForm">
+    Gender: 
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female<br>
+
+    Hobbies: 
+    <input type="checkbox" name="hobbies" value="Reading"> Reading
+    <input type="checkbox" name="hobbies" value="Traveling"> Traveling
+    <input type="checkbox" name="hobbies" value="Cooking"> Cooking<br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("userForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      let gender = document.querySelector('input[name="gender"]:checked');
+      let hobbies = document.querySelectorAll('input[name="hobbies"]:checked');
+      
+      if (!gender) {
+        alert("Please select a gender.");
+        return;
+      }
+
+      if (hobbies.length === 0) {
+        alert("Please select at least one hobby.");
+        return;
+      }
+
+      let result = "Gender: " + gender.value + "<br>Hobbies: ";
+      hobbies.forEach((hobby) => {
+        result += hobby.value + " ";
+      });
+      document.getElementById("result").innerHTML = result;
+    });
+  </script>
+</body>
+</html>
+3. Event Handler Attributes: onchange, onmouseover, onmouseout
+Answer:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Handlers Example</title>
+  <style>
+    #hoverDiv {
+      width: 200px;
+      height: 100px;
+      background-color: lightgray;
+      text-align: center;
+      padding-top: 30px;
+      transition: background-color 0.5s, font-size 0.5s;
+    }
+  </style>
+</head>
+<body>
+
+  <input type="text" id="emailInput" onchange="validateEmail()">
+  <div id="emailMessage"></div>
+
+  <div id="hoverDiv" onmouseover="changeStyle()" onmouseout="resetStyle()">Hover over me!</div>
+
+  <script>
+    function validateEmail() {
+      const email = document.getElementById("emailInput").value;
+      const message = document.getElementById("emailMessage");
+      if (email.includes('@') && email.includes('.com')) {
+        message.textContent = "Valid email!";
+        message.style.color = "green";
+      } else {
+        message.textContent = "Invalid email!";
+        message.style.color = "red";
+      }
+    }
+
+    function changeStyle() {
+      const div = document.getElementById("hoverDiv");
+      div.style.backgroundColor = "blue";
+      div.style.fontSize = "20px";
+    }
+
+    function resetStyle() {
+      const div = document.getElementById("hoverDiv");
+      div.style.backgroundColor = "lightgray";
+      div.style.fontSize = "16px";
+    }
+  </script>
+</body>
+</html>
+4. While Loop, do Loop, for Loop
+Answer:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiplication Table</title>
+</head>
+<body>
+
+  <table id="table"></table>
+
+  <script>
+    let tableHTML = "<tr><th>Number</th><th>Multiplication</th></tr>";
+    
+    // Using a for loop to create a multiplication table
+    for (let i = 1; i <= 12; i++) {
+      tableHTML += `<tr><td>${i}</td><td>${i * 5}</td></tr>`;
+    }
+
+    document.getElementById("table").innerHTML = tableHTML;
+
+    // Using a while loop to sum all even numbers in the table
+    let sum = 0;
+    let num = 2;
+    while (num <= 12) {
+      sum += num;
+      num += 2;
+    }
+
+    alert("Sum of even numbers: " + sum);
+
+    // Using a do-while loop to display confirmation for each even number
+    let confirmation = "";
+    num = 2;
+    do {
+      confirmation += `Are you sure you want to include ${num}? (Yes/No)\n`;
+      num += 2;
+    } while (num <= 12);
+
+    alert(confirmation);
+  </script>
+</body>
+</html>
+5. Fieldset and Legend Elements
+Answer:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fieldset and Legend Example</title>
+</head>
+<body>
+
+  <form id="myForm">
+    <fieldset>
+      <legend>Personal Information</legend>
+      Name: <input type="text" id="name" required><br>
+      Email: <input type="email" id="email" required><br>
+    </fieldset>
+
+    <fieldset>
+      <legend>Address Information</legend>
+      Street: <input type="text" id="street" required><br>
+      City: <input type="text" id="city" required><br>
+      Zip: <input type="text" id="zip" required><br>
+    </fieldset>
+
+    <button type="button" onclick="validateForm()">Submit</button>
+  </form>
+
+  <div id="errorMessages"></div>
+
+  <script>
+    function validateForm() {
+      let errors = [];
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const street = document.getElementById("street").value;
+      const city = document.getElementById("city").value;
+      const zip = document.getElementById("zip").value;
+
+      if (!name) errors.push("Name is required.");
+      if (!email) errors.push("Email is required.");
+      if (!street) errors.push("Street is required.");
+      if (!city) errors.push("City is required.");
+      if (!zip) errors.push("Zip code is required.");
+
+      if (errors.length > 0) {
+        document.getElementById("errorMessages").innerHTML = errors.join("<br>");
+      } else {
+        alert("Form submitted successfully!");
+      }
+    }
+  </script>
+
+</body>
+</html>
+6. Manipulating CSS with JavaScript
+Answer:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Manipulation Example</title>
+</head>
+<body>
+
+  <button onclick="changeBackgroundColor()">Change Background Color</button>
+  <div id="specialDiv" style="width: 200px; height: 100px; background-color: gray;">
+    This is a special div.
+  </div>
+
+  <script>
+    function changeBackgroundColor() {
+      document.body.style.backgroundColor = getRandomColor();
+    }
+
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    let clickCount = 0;
+    document.querySelector("button").addEventListener("click", function() {
+      clickCount++;
+      if (clickCount === 5) {
+        document.getElementById("specialDiv").style.background = "linear-gradient(to right, green, yellow)";
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+7. Using z-index to Stack Elements
+Answer:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>z-index Stacking Example</title>
+  <style>
+    .container {
+      position: relative;
+      width: 300px;
+      height: 200px;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .box1 {
+      background-color: red;
+      top: 50px;
+      left: 50px;
+      z-index: 1;
+    }
+
+    .box2 {
+      background-color: green;
+      top: 70px;
+      left: 70px;
+      z-index: 2;
+    }
+
+    .box3 {
+      background-color: blue;
+      top: 90px;
+      left: 90px;
+      z-index: 3;
+    }
+
+    .btn {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="box box1"></div>
+    <div class="box box2"></div>
+    <div class="box box3"></div>
+  </div>
+
+  <button class="btn" onclick="toggleZIndex()">Change z-index Order</button>
+
+  <script>
+    let zIndexCounter = 1;
+
+    function toggleZIndex() {
+      // Increment the z-index counter to change stacking order
+      zIndexCounter++;
+
+      if (zIndexCounter > 3) {
+        zIndexCounter = 1;  // Reset to initial order
+      }
+
+      // Change z-index of boxes based on the current counter
+      document.querySelector('.box1').style.zIndex = (zIndexCounter === 1) ? 1 : 0;
+      document.querySelector('.box2').style.zIndex = (zIndexCounter === 2) ? 1 : 0;
+      document.querySelector('.box3').style.zIndex = (zIndexCounter === 3) ? 1 : 0;
+    }
+  </script>
+
+</body>
+</html>
+Explanation:
+We have a .container that holds three absolutely positioned .box elements (with different colors: red, green, and blue).
+Initially, each .box has a specific z-index value to define its stacking order.
+When the user clicks the "Change z-index Order" button, the toggleZIndex() function is called to change the stacking order dynamically by adjusting the z-index values of the boxes.
+This interaction is controlled using JavaScript and the z-index CSS property, and the transition makes the change smooth.
+Key Points:
+z-index controls the stacking order of elements that overlap. Higher values mean elements appear on top of lower z-index elements.
+The transition makes the change in stacking order visually smooth.
+This demonstrates how you can manipulate the stacking of elements dynamically using z-index and JavaScript.
+
+
+You said:
+8,9,10,11 all
+ChatGPT said:
+Sure! Below are the answers for Questions 8, 9, 10, and 11:
+
+8. Textarea Controls
+Answer:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Textarea Validation Example</title>
+  <style>
+    #message { color: red; }
+  </style>
+</head>
+<body>
+
+  <textarea id="address" rows="4" cols="50" placeholder="Enter your address..."></textarea><br>
+  <button onclick="submitForm()">Submit</button>
+  <div id="message"></div>
+
+  <script>
+    function submitForm() {
+      const address = document.getElementById("address").value;
+      const message = document.getElementById("message");
+
+      if (address === "") {
+        message.textContent = "Address cannot be empty.";
+      } else if (address.length > 200) {
+        message.textContent = "Address cannot exceed 200 characters.";
+      } else {
+        message.textContent = ""; // Clear error message
+        document.body.innerHTML += "<h2>Submitted Address:</h2><p>" + address + "</p>";
+      }
+    }
+  </script>
+
+</body>
+</html>
+Explanation:
+This code uses a <textarea> for the user to enter an address.
+Upon clicking the "Submit" button, the submitForm() function validates the address input to ensure it isn't empty and doesn't exceed 200 characters.
+If valid, the address is displayed below; otherwise, an error message is shown.
+
+
+9. Pull-Down Menus, List Boxes
+Answer:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic Dropdown Example</title>
+</head>
+<body>
+
+  <form>
+    <label for="country">Country:</label>
+    <select id="country" onchange="updateStates()">
+      <option value="">Select a country</option>
+      <option value="USA">USA</option>
+      <option value="UK">UK</option>
+      <option value="Canada">Canada</option>
+    </select><br>
+
+    <label for="state">State/Province:</label>
+    <select id="state">
+      <option value="">Select a state/province</option>
+    </select>
+  </form>
+
+  <script>
+    const states = {
+      USA: ["California", "Texas", "Florida"],
+      UK: ["England", "Scotland", "Wales"],
+      Canada: ["Ontario", "Quebec", "British Columbia"]
+    };
+
+    function updateStates() {
+      const country = document.getElementById("country").value;
+      const stateSelect = document.getElementById("state");
+      stateSelect.innerHTML = "<option value=''>Select a state/province</option>";
+
+      if (country) {
+        const countryStates = states[country];
+        countryStates.forEach(state => {
+          const option = document.createElement("option");
+          option.value = state;
+          option.textContent = state;
+          stateSelect.appendChild(option);
+        });
+      }
+    }
+  </script>
+
+</body>
+</html>
+Explanation:
+This code features a country dropdown (<select>), and based on the selected country, the states or provinces dropdown is populated dynamically.
+The updateStates() function listens for changes in the country dropdown and updates the state dropdown with corresponding options.
+
+
+10. Canvas and Drawing
+Answer:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas Drawing Example</title>
+  <style>
+    #canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="canvas" width="500" height="500"></canvas><br>
+  <button onclick="resetCanvas()">Reset Canvas</button>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    let drawing = false;
+    let currentShape = "circle"; // Default shape
+
+    canvas.addEventListener("mousedown", startDrawing);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", stopDrawing);
+
+    function startDrawing(event) {
+      drawing = true;
+      draw(event); // Start drawing immediately on mousedown
+    }
+
+    function draw(event) {
+      if (!drawing) return;
+
+      const x = event.offsetX;
+      const y = event.offsetY;
+
+      ctx.beginPath();
+      if (currentShape === "circle") {
+        ctx.arc(x, y, 10, 0, Math.PI * 2);
+      } else if (currentShape === "rectangle") {
+        ctx.rect(x - 10, y - 10, 20, 20);
+      }
+      ctx.fillStyle = "blue";
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function stopDrawing() {
+      drawing = false;
+    }
+
+    function resetCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+    }
+  </script>
+
+</body>
+</html>
+Explanation:
+This code uses the HTML5 <canvas> element and JavaScript to draw on the canvas.
+The mousedown, mousemove, and mouseup events are used to track the user's mouse and allow drawing circles or rectangles on the canvas.
+The "Reset Canvas" button clears the canvas.
+11. Event Handler and Listener
+Answer:
+
+html
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Listener Example</title>
+  <style>
+    #contentDiv {
+      width: 200px;
+      height: 100px;
+      background-color: lightblue;
+      text-align: center;
+      padding-top: 35px;
+      transition: background-color 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="toggleVisibilityButton">Toggle Visibility</button>
+  <div id="contentDiv">This is a content div</div>
+
+  <script>
+    // Toggle visibility function using addEventListener
+    document.getElementById("toggleVisibilityButton").addEventListener("click", function() {
+      const contentDiv = document.getElementById("contentDiv");
+      if (contentDiv.style.display === "none") {
+        contentDiv.style.display = "block";
+      } else {
+        contentDiv.style.display = "none";
+      }
+    });
+
+    // Change background color on mouse events
+    const contentDiv = document.getElementById("contentDiv");
+    contentDiv.addEventListener("mouseover", function() {
+      contentDiv.style.backgroundColor = "green";
+    });
+
+    contentDiv.addEventListener("mouseout", function() {
+      contentDiv.style.backgroundColor = "lightblue";
+    });
+  </script>
+
+</body>
+</html>
+Explanation:
+This example demonstrates how to use JavaScript addEventListener to toggle the visibility of a div and change its background color on mouse events.
+The visibility toggle is controlled by clicking the button, and the background color changes when the user hovers over the div (mouseover and mouseout events).
+Summary:
+Question 8: Validates the text in a textarea and ensures it is within a specified length.
+Question 9: Dynamically updates the second dropdown (state/province) based on the country selected in the first dropdown.
+Question 10: Allows the user to draw shapes (circle or rectangle) on an HTML canvas and provides a reset functionality.
+Question 11: Demonstrates using event listeners to toggle the visibility of an element and change its background color with mouse events.
+Let me know if you'd like any further clarification!
+
+Glowing text with animation
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glowing Text</title>
+<link rel="stylesheet" href="glow.css">
+</head>
+<body>
+<h1 class="glow-text">🔥 Advanced Web Development 🔥</h1>
+</body>
+</html>
+
+body {
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.glow-text {
+  font-size: 60px;
+  color: white;
+  text-transform: uppercase;
+  animation: glowing 3s infinite alternate;
+}
+
+@keyframes glowing {
+  0% {
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff8000, 0 0 30px #ffbf00;
+  }
+  100% {
+    text-shadow: 0 0 20px #ff00ff, 0 0 30px #00ffff, 0 0 40px #00ff00;
+  }
+}
+
+6. Typing Speed Test ⌨️🔥
+________________________________________
+HTML
+html
+CopyEdit
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typing Speed Test</title>
+<link rel="stylesheet" href="typing.css">
+</head>
+<body>
+<h1>Typing Speed Test</h1>
+<p id="sentence">The quick brown fox jumps over the lazy dog.</p>
+<textarea id="input" placeholder="Start Typing..."></textarea>
+<div id="result"></div>
+
+<script src="typing.js"></script>
+</body>
+</html>
+________________________________________
+CSS (typing.css)
+css
+CopyEdit
+body {
+  text-align: center;
+  padding-top: 100px;
+}
+
+textarea {
+  width: 300px;
+  height: 100px;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 20px;
+}
+________________________________________
+JS (typing.js)
+js
+CopyEdit
+let startTime;
+
+document.getElementById("input").onkeydown = function () {
+  if (!startTime) {
+    startTime = new Date();
+  }
+};
+
+document.getElementById("input").onkeyup = function () {
+  let input = this.value.trim();
+  let sentence = document.getElementById("sentence").textContent;
+  if (input === sentence) {
+    let endTime = new Date();
+    let time = (endTime - startTime) / 1000;
+    document.getElementById("result").innerHTML = `Time Taken: ${time} seconds`;
+  }
+};
+________________________________________
+✅ Output:
+It shows Typing Speed in Seconds 🔥.
+________________________________________
+________________________________________
+7. Random Color Generator 🎨
+________________________________________
+HTML
+html
+CopyEdit
+<!DOCTYPE html>
+<html>
+<head>
+<title>Random Color Generator</title>
+</head>
+<body>
+<h1>Random Color Generator</h1>
+<button onclick="generateColor()">Generate Color</button>
+<div id="colorBox"></div>
+
+<script src="color.js"></script>
+</body>
+</html>
+________________________________________
+CSS
+css
+CopyEdit
+#colorBox {
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
+}
+________________________________________
+JS (color.js)
+js
+CopyEdit
+function generateColor() {
+  let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  document.getElementById("colorBox").style.background = randomColor;
+}
+✅ Output:
+Generates Random Background Colors on Button Click.
+________________________________________
+________________________________________
+8. Dark Mode Toggle 🌙🔆
+________________________________________
+HTML
+html
+CopyEdit
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dark Mode</title>
+<link rel="stylesheet" href="dark.css">
+</head>
+<body>
+<h1>Dark Mode</h1>
+<button onclick="toggleMode()">Toggle Dark Mode</button>
+
+<script src="dark.js"></script>
+</body>
+</html>
+________________________________________
+CSS (dark.css)
+css
+CopyEdit
+body {
+  text-align: center;
+  padding-top: 100px;
+  transition: background 0.5s;
+}
+
+.dark {
+  background: black;
+  color: white;
+}
+________________________________________
+JS (dark.js)
+js
+CopyEdit
+function toggleMode() {
+  document.body.classList.toggle("dark");
+}
+✅ Output:
+One click = Dark Mode 🔥
+Second click = Light Mode 🔆
+________________________________________
+________________________________________
+9. Random Password Generator 🔑
+________________________________________
+HTML
+html
+CopyEdit
+<!DOCTYPE html>
+<html>
+<head>
+<title>Password Generator</title>
+</head>
+<body>
+<h1>Password Generator</h1>
+<button onclick="generatePassword()">Generate Password</button>
+<p id="password"></p>
+
+<script src="password.js"></script>
+</body>
+</html>
+________________________________________
+JS (password.js)
+js
+CopyEdit
+function generatePassword() {
+  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!";
+  let password = "";
+  for (let i = 0; i < 10; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  document.getElementById("password").textContent = password;
+}
+✅ Output:
+Generates Random Strong Password 🔥
+________________________________________
+________________________________________
+10. Image Filter App 🌈
+________________________________________
+HTML
+html
+CopyEdit
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Filter</title>
+<link rel="stylesheet" href="filter.css">
+</head>
+<body>
+<h1>Image Filter App</h1>
+<img src="https://source.unsplash.com/300x300/?nature" id="image">
+<select onchange="applyFilter(this.value)">
+  <option value="">No Filter</option>
+  <option value="grayscale(100%)">Grayscale</option>
+  <option value="blur(5px)">Blur</option>
+  <option value="sepia(100%)">Sepia</option>
+</select>
+
+<script src="filter.js"></script>
+</body>
+</html>
+________________________________________
+CSS (filter.css)
+css
+CopyEdit
+img {
+  display: block;
+  margin: 20px auto;
+}
+________________________________________
+JS (filter.js)
+js
+CopyEdit
+function applyFilter(filter) {
+  document.getElementById("image").style.filter = filter;
+}
+
+2. Instagram Story Progress Bar Clone 📸
+________________________________________
+HTML + CSS + JS
+________________________________________
+HTML
+html
+CopyEdit
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram Story Progress Bar</title>
+<link rel="stylesheet" href="story.css">
+</head>
+<body>
+<div class="story">
+  <div class="progress"></div>
+</div>
+</body>
+</html>
+________________________________________
+CSS (story.css)
+css
+CopyEdit
+.story {
+  width: 300px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  animation: load 5s infinite;
+}
+
+@keyframes load {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+✅ Output:
+Instagram Story Progress Bar 🌈
+
+
+
+
+
+
+
+
+

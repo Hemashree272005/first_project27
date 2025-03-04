@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Traffic Light</title>
+<style>
+.container {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 20px;
+background-color: #333;
+border-radius: 10px;
+width: 120px;
+margin: 20px auto;
+}
+
+.light {
+width: 80px;
+height: 80px;
+border-radius: 50%;
+margin: 10px;
+background-color: #444;
+transition: background-color 0.3s ease;
+
+}
+
+.controls {
+margin-top: 20px;
+text-align: center;
+}
+
+button {
+padding: 10px 20px;
+margin: 5px;
+cursor: pointer;
+background-color: #4CAF50;
+color: white;
+border: none;
+border-radius: 5px;
+}
+
+button:hover {
+background-color: #45a049;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div id="red" class="light"></div>
+<div id="yellow" class="light"></div>
+
+<div id="green" class="light"></div>
+</div>
+<div class="controls">
+<button onclick="startTrafficLight()">Start</button>
+<button onclick="stopTrafficLight()">Stop</button>
+</div>
+
+<script>
+let interval;
+let currentLight = 0;
+const lights = ['red', 'green', 'yellow'];
+const colors = {
+red: '#ff0000',
+yellow: '#ffff00',
+green: '#00ff00'
+};
+
+function clearLights() {
+lights.forEach(light => {
+document.getElementById(light).style.backgroundColor = '#444';
+});
+}
+
+function setLight(color) {
+clearLights();
+document.getElementById(color).style.backgroundColor = colors[color];
+
+}
+
+function changeLight() {
+currentLight = (currentLight + 1) % lights.length;
+setLight(lights[currentLight]);
+}
+
+function startTrafficLight() {
+// Clear any existing interval
+stopTrafficLight();
+
+currentLight = 0;
+setLight(lights[currentLight]);
+
+interval = setInterval(changeLight, 1000);
+}
+
+function stopTrafficLight() {
+clearInterval(interval);
+clearLights();
+}
+</script>
+</body>
+</html>
